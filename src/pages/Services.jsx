@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { services, categories } from "../data/services";
 import ServiceCard from "../components/ServiceCard";
+import NearbyServicesPanel from "../components/NearbyServicesPanel";
 
 export default function Services({ favorites, onToggleFavorite }) {
   const [search, setSearch] = useState("");
@@ -31,10 +32,18 @@ export default function Services({ favorites, onToggleFavorite }) {
           </div>
           <h1 className="services-header__title">Emergency Services</h1>
           <p className="services-header__sub">
-            Complete directory of emergency contacts. Filter by category, priority, or search by name and number.
+            Complete verified directory of government and private emergency contacts. Filter by category, priority, or search by name and number.
           </p>
         </div>
       </div>
+
+      <NearbyServicesPanel
+        services={services}
+        title="Nearest emergency services"
+        subtitle="Use GPS to surface the closest verified police stations, fire services, hospitals, and pharmacies before you start filtering the full directory."
+        categories={["Police Station", "Fire Station", "Hospital", "Pharmacy"]}
+        limit={6}
+      />
 
       <div className="services-body">
         {/* Sidebar */}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { services } from "../data/services";
+import NearbyServicesPanel from "../components/NearbyServicesPanel";
 
 const criticalServices = services.filter((s) => s.tag === "CRITICAL").slice(0, 3);
 
@@ -43,7 +44,7 @@ export default function Home() {
           {/* Stats */}
           <div className="hero__stats">
             {[
-              { val: "9", label: "Services Listed" },
+              { val: `${services.length}`, label: "Services Listed" },
               { val: "24/7", label: "Always Available" },
               { val: "< 10m", label: "Avg Response" },
               { val: "Free", label: "All Hotlines" },
@@ -81,6 +82,14 @@ export default function Home() {
         </div>
       </section>
 
+      <NearbyServicesPanel
+        services={services}
+        title="Nearest verified emergency services"
+        subtitle="Turn on GPS to rank the closest hospitals, police stations, fire services, and pharmacies near you."
+        categories={["Police Station", "Fire Station", "Hospital", "Pharmacy"]}
+        limit={4}
+      />
+
       {/* How it works */}
       <section className="how">
         <div className="section-inner">
@@ -110,7 +119,7 @@ export default function Home() {
           <div className="cta-banner__inner">
             <div>
               <h2 className="cta-banner__title">Save Services. Be Ready.</h2>
-              <p className="cta-banner__desc">Bookmark critical contacts before an emergency happens.</p>
+              <p className="cta-banner__desc">Bookmark critical contacts before an emergency happens. Every listed service is verified.</p>
             </div>
             <Link to="/services" className="cta-banner__btn">
               Explore All Services →

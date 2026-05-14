@@ -30,9 +30,21 @@ export default function ServiceCard({ service, isFavorite, onToggleFavorite }) {
             <span className="text-[22px]">{service.icon}</span>
           </div>
           <div className="flex-1 flex flex-col gap-1">
-            <span className="inline-block font-[var(--font-mono)] text-[9px] font-medium tracking-wider px-2 py-[2px] rounded-[4px]" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
-              {service.tag}
-            </span>
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-block font-[var(--font-mono)] text-[9px] font-medium tracking-wider px-2 py-[2px] rounded-[4px]" style={{ background: tc.bg, color: tc.color, border: `1px solid ${tc.border}` }}>
+                {service.tag}
+              </span>
+              {service.verified && (
+                <span className="inline-block font-[var(--font-mono)] text-[9px] font-medium tracking-wider px-2 py-[2px] rounded-[4px] bg-[rgba(34,197,94,0.1)] text-[#22c55e] border border-[rgba(34,197,94,0.25)]">
+                  VERIFIED
+                </span>
+              )}
+              {service.ownership && (
+                <span className="inline-block font-[var(--font-mono)] text-[9px] font-medium tracking-wider px-2 py-[2px] rounded-[4px] bg-[rgba(255,255,255,0.04)] text-[var(--text-muted)] border border-[var(--border)]">
+                  {service.ownership.toUpperCase()}
+                </span>
+              )}
+            </div>
             <span className="text-[11px] text-[var(--text-muted)] uppercase tracking-[0.5px]">{service.category}</span>
           </div>
           <button
@@ -60,6 +72,12 @@ export default function ServiceCard({ service, isFavorite, onToggleFavorite }) {
             <span className="text-[12px] font-medium text-[var(--text-primary)]">{service.responseTime}</span>
           </div>
         </div>
+
+        {typeof service.distanceKm === "number" && (
+          <div className="mb-3 text-[12px] text-[var(--text-secondary)]">
+            Approx. {service.distanceKm.toFixed(1)} km from your location
+          </div>
+        )}
 
         {/* Hotline */}
         <div className="mb-3.5">
